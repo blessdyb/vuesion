@@ -10,15 +10,15 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from '@vue/composition-api';
+import { ListControlProps } from '@/components/Props';
+
+export default defineComponent({
   name: 'VueBreadcrumb',
   props: {
-    items: {
-      type: Array,
-      required: true,
-    },
+    ...ListControlProps(),
   },
-};
+});
 </script>
 
 <style lang="scss" module>

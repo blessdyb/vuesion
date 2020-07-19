@@ -15,11 +15,12 @@ import { useOutsideClick } from '@/composables/use-outside-click';
 import { useKeydown } from '@/composables/use-keydown';
 import { useBackdrop } from '@/composables/use-backdrop';
 import { getDomRef } from '@/composables/get-dom-ref';
+import { VisibilityProps } from '@/components/Props';
 
 export default defineComponent({
   name: 'VueModal',
   props: {
-    show: { type: Boolean, default: false },
+    ...VisibilityProps(),
     backdrop: { type: Boolean, default: true },
     scrollable: { type: Boolean, default: false },
     closeOnEscape: { type: Boolean, default: true },
@@ -28,16 +29,16 @@ export default defineComponent({
   setup(props, { emit }) {
     const modal = getDomRef(null);
     const show = computed(() => props.show);
-    const { onOutsideClick } = useOutsideClick(modal);
     const { onKeydown } = useKeydown();
     const onClose = () => emit('close');
 
-    onOutsideClick(() => onClose());
     onKeydown((event: KeyboardEvent) => {
       if (event.key === 'Escape' && props.show === true && props.closeOnEscape === true) {
         onClose();
       }
     });
+
+    useOutsideClick(modal, () => onClose());
 
     if (props.backdrop) {
       useBackdrop(show, { scrollable: props.scrollable });

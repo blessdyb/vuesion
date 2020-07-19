@@ -22,9 +22,9 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api';
-import { variationValidator } from '../../utils';
 import VueLoader from '../VueLoader/VueLoader.vue';
 import { getDomRef } from '@/composables/get-dom-ref';
+import { AsyncProps, FormControlProps, VariationProps } from '@/components/Props';
 
 export default defineComponent({
   name: 'VueButton',
@@ -32,9 +32,9 @@ export default defineComponent({
     VueLoader,
   },
   props: {
-    color: { type: String, validator: variationValidator, default: 'default' },
-    disabled: { type: Boolean, default: false },
-    loading: { type: Boolean, default: false },
+    ...FormControlProps(),
+    ...VariationProps(),
+    ...AsyncProps(),
     ghost: { type: Boolean, default: false },
     block: { type: Boolean, default: false },
     as: { type: String, default: 'button' },
