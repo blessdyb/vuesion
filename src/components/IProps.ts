@@ -1,61 +1,67 @@
 import { PropOptions } from '@vue/composition-api';
+import { IItem } from '@/components/IItem';
 
-export interface IFormControlProps {
-  disabled: PropOptions;
+interface IProps {
+  [key: string]: any;
+}
+
+export interface IFormControlProps extends IProps {
+  disabled: PropOptions<boolean>;
+  block: PropOptions<boolean>;
 }
 
 export interface IInputControlProps extends IFormControlProps {
-  id: PropOptions;
-  label: PropOptions;
-  name: PropOptions;
-  required: PropOptions;
+  id: PropOptions<string>;
+  label: PropOptions<string>;
+  name: PropOptions<string>;
+  required: PropOptions<boolean>;
   validation: PropOptions;
-  value: PropOptions;
+  value: PropOptions<string | number | boolean | object>;
 }
 
 export interface ITextInputControlProps extends IInputControlProps {
-  placeholder: PropOptions;
-  autofocus: PropOptions;
-  type: PropOptions;
-  readonly: PropOptions;
-  description: PropOptions;
-  errorMessage: PropOptions;
-  autocomplete: PropOptions;
+  placeholder: PropOptions<string>;
+  autofocus: PropOptions<boolean>;
+  type: PropOptions<string>;
+  readonly: PropOptions<boolean>;
+  description: PropOptions<string>;
+  errorMessage: PropOptions<string>;
+  autocomplete: PropOptions<string>;
 }
 
-export interface IListControlProps {
-  items: PropOptions;
+export interface IListControlProps extends IProps {
+  items: PropOptions<IItem[]>;
 }
 
 export interface ISelectControlProps extends IListControlProps {
-  multiSelect: PropOptions;
+  multiSelect: PropOptions<boolean>;
 }
 
-export interface IVariationProps {
-  color: PropOptions;
-  size: PropOptions;
+export interface IVariationProps extends IProps {
+  color: PropOptions<string>;
+  size: PropOptions<string>;
 }
 
-export interface IAnimationProps {
-  duration: PropOptions;
+export interface IAnimationProps extends IProps {
+  duration: PropOptions<number>;
 }
 
-export interface IVisibilityProps {
-  show: PropOptions;
+export interface IVisibilityProps extends IProps {
+  show: PropOptions<boolean>;
 }
 
-export interface IAsyncProps {
-  loading: PropOptions;
+export interface IAsyncProps extends IProps {
+  loading: PropOptions<boolean>;
 }
 
 export interface ICollapseControlProps extends IAnimationProps, IVisibilityProps {}
 
-export interface ICalendarProps {
-  selectedDate: PropOptions;
-  today: PropOptions;
-  minDate: PropOptions;
-  maxDate: PropOptions;
-  firstDayOfWeek: PropOptions;
-  startDate: PropOptions;
-  endDate: PropOptions;
+export interface ICalendarProps extends IProps {
+  selectedDate: PropOptions<Date>;
+  today: PropOptions<Date>;
+  minDate: PropOptions<Date>;
+  maxDate: PropOptions<Date>;
+  firstDayOfWeek: PropOptions<number>;
+  startDate: PropOptions<Date>;
+  endDate: PropOptions<Date>;
 }

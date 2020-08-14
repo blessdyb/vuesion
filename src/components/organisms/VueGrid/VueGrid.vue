@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.grid, fill && $style.fill, space && $style[space], withVerticalSpace && $style.withVerticalSpace]"
+    :class="[$style.vueGrid, fluid && $style.fluid, $style[`v${verticalSpace}`], $style[`h${horizontalSpace}`]]"
     :style="{ textAlign }"
   >
     <slot />
@@ -14,14 +14,14 @@ import { spacingValidator } from '../../utils';
 export default defineComponent({
   name: 'VueGrid',
   props: {
-    space: { type: String, validator: spacingValidator, default: 'md' },
+    verticalSpace: { type: String, validator: spacingValidator, default: 'md' },
+    horizontalSpace: { type: String, validator: spacingValidator, default: 'md' },
     textAlign: { type: String, default: 'left' },
-    withVerticalSpace: { type: Boolean, default: false },
-    fill: { type: Boolean, default: false },
+    fluid: { type: Boolean, default: false },
   },
   setup(props) {
-    provide('gridSpace', props.space);
-    provide('gridWithVerticalSpace', props.withVerticalSpace);
+    provide('gridVerticalSpace', props.verticalSpace);
+    provide('gridHorizontalSpace', props.horizontalSpace);
     provide('gridTextAlign', props.textAlign);
   },
 });
@@ -30,7 +30,7 @@ export default defineComponent({
 <style lang="scss" module>
 @import '~@/assets/design-system';
 
-.grid {
+.vueGrid {
   max-width: 425px;
   margin: 0 auto;
   position: relative;
@@ -52,33 +52,34 @@ export default defineComponent({
     max-width: $screen-large-desktop;
   }
 
-  &.fill {
+  &.fluid {
     width: 100%;
     max-width: 100%;
+    padding: 0;
   }
 
-  &.sm {
+  &.hsm {
     padding: 0 $gutter-sm;
-
-    &.withVerticalSpace {
-      padding-bottom: $gutter-sm;
-    }
   }
 
-  &.md {
+  &.hmd {
     padding: 0 $gutter-md;
-
-    &.withVerticalSpace {
-      padding-bottom: $gutter-md;
-    }
   }
 
-  &.lg {
+  &.hlg {
     padding: 0 $gutter-lg;
+  }
 
-    &.withVerticalSpace {
-      padding-bottom: $gutter-lg;
-    }
+  &.vsm {
+    padding-bottom: $gutter-sm;
+  }
+
+  &.vmd {
+    padding-bottom: $gutter-md;
+  }
+
+  &.vlg {
+    padding-bottom: $gutter-lg;
   }
 }
 </style>

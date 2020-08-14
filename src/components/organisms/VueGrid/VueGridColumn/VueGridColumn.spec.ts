@@ -2,10 +2,11 @@ import { render } from '@testing-library/vue';
 import VueGridColumns from './VueGridColumn.vue';
 
 describe('VueGridColumn.vue', () => {
-  const provide = {
-    rowSpace: 'sm',
-    rowWithVerticalSpace: true,
+  const provide: any = {
+    rowVerticalSpace: 'sm',
+    rowHorizontalSpace: 'sm',
     rowTextAlign: 'center',
+    rowJustifyContent: null,
   };
 
   test('renders gridColumn with slot', () => {
@@ -22,7 +23,7 @@ describe('VueGridColumn.vue', () => {
       slots: { default: 'this is the slot' },
       provide,
       propsData: {
-        width: 50,
+        width: '50%',
       },
     });
 
@@ -100,6 +101,36 @@ describe('VueGridColumn.vue', () => {
 
     const actual = getByText('this is the slot').style.flex;
     const expected = '1 0 auto';
+
+    expect(actual).toBe(expected);
+  });
+
+  test('renders gridColumn that has a flex display if alignSelf is set', () => {
+    const { getByText } = render<any>(VueGridColumns, {
+      slots: { default: 'this is the slot' },
+      provide,
+      propsData: {
+        alignSelf: 'stretch',
+      },
+    });
+
+    const actual = getByText('this is the slot').style.display;
+    const expected = 'flex';
+
+    expect(actual).toBe(expected);
+  });
+
+  test('renders gridColumn that has a flex display if justifyContent is set', () => {
+    const { getByText } = render<any>(VueGridColumns, {
+      slots: { default: 'this is the slot' },
+      provide,
+      propsData: {
+        justifyContent: 'center',
+      },
+    });
+
+    const actual = getByText('this is the slot').style.display;
+    const expected = 'flex';
 
     expect(actual).toBe(expected);
   });

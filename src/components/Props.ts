@@ -16,6 +16,7 @@ import {
 
 export const FormControlProps = (): IFormControlProps => ({
   disabled: { type: Boolean, default: false },
+  block: { type: Boolean, default: false },
 });
 
 export const InputControlProps = (): IInputControlProps => ({
