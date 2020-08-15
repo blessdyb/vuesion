@@ -2,6 +2,7 @@
   <div
     :class="[$style.vueGridColumn, $style[`v${columnVerticalSpace}`], $style[`h${columnHorizontalSpace}`]]"
     :style="styles"
+    :data-width="width"
   >
     <slot />
   </div>
@@ -17,7 +18,11 @@ export default defineComponent({
   props: {
     verticalSpace: { type: String, validator: spacingValidator, default: null },
     horizontalSpace: { type: String, validator: spacingValidator, default: null },
-    width: { type: String, default: null },
+    width: { type: String, default: 'auto' },
+    tabletPortrait: { type: String, default: null },
+    tabletLandscape: { type: String, default: null },
+    smallDesktop: { type: String, default: null },
+    largeDesktop: { type: String, default: null },
     height: { type: String, default: null },
     textAlign: { type: String, default: null },
     canGrow: { type: Boolean, default: true },
@@ -42,16 +47,25 @@ export default defineComponent({
 
       return null;
     });
+    const phone = computed(() => props.width);
+    const tabletPortrait = computed(() => defaultTo(props.tabletPortrait, phone.value));
+    const tabletLandscape = computed(() => defaultTo(props.tabletLandscape, tabletPortrait.value));
+    const smallDesktop = computed(() => defaultTo(props.smallDesktop, tabletLandscape.value));
+    const largeDesktop = computed(() => defaultTo(props.largeDesktop, smallDesktop.value));
 
     const styles = computed(() => {
       return {
-        flexBasis: props.width || 'auto',
         textAlign: columnTextAlign.value,
         flexGrow: props.canGrow ? '1' : '0',
         flexShrink: props.canShrink ? '1' : '0',
         display: display.value,
         justifyContent: columnJustifyContent.value,
         alignSelf: props.alignSelf,
+        '--phone': phone.value,
+        '--tablet-portrait': tabletPortrait.value,
+        '--tablet-landscape': tabletLandscape.value,
+        '--small-desktop': smallDesktop.value,
+        '--large-desktop': largeDesktop.value,
       };
     });
 
@@ -71,13 +85,22 @@ export default defineComponent({
 
 .vueGridColumn {
   padding: 0;
-
-  @include mediaMax(tabletPortrait) {
-    flex-basis: 100% !important;
-  }
+  flex-basis: var(--phone);
 
   @include mediaMin(tabletPortrait) {
-    flex: 1;
+    flex-basis: var(--tablet-portrait);
+  }
+
+  @include mediaMin(tabletLandscape) {
+    flex-basis: var(--tablet-landscape);
+  }
+
+  @include mediaMin(smallDesktop) {
+    flex-basis: var(--small-desktop);
+  }
+
+  @include mediaMin(largeDesktop) {
+    flex-basis: var(--large-desktop);
   }
 
   &.hsm {

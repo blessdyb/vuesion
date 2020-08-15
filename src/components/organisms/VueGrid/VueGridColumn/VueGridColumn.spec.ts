@@ -27,8 +27,44 @@ describe('VueGridColumn.vue', () => {
       },
     });
 
-    const actual = getByText('this is the slot').style.flexBasis;
+    const actual = getByText('this is the slot').style.getPropertyValue('--phone');
     const expected = '50%';
+
+    expect(actual).toBe(expected);
+  });
+
+  test('renders gridColumn with custom width for small Desktop', () => {
+    const { getByText } = render<any>(VueGridColumns, {
+      slots: { default: 'this is the slot' },
+      provide,
+      propsData: {
+        smallDesktop: '50%',
+      },
+    });
+
+    const actual = getByText('this is the slot').style.getPropertyValue('--small-desktop');
+    const expected = '50%';
+
+    expect(actual).toBe(expected);
+  });
+
+  test('renders gridColumn with custom width and other viewports should inherit this value', () => {
+    const { getByText } = render<any>(VueGridColumns, {
+      slots: { default: 'this is the slot' },
+      provide,
+      propsData: {
+        width: '100%',
+        smallDesktop: '50%',
+      },
+    });
+
+    let actual = getByText('this is the slot').style.getPropertyValue('--tablet-landscape');
+    let expected = '100%';
+
+    expect(actual).toBe(expected);
+
+    actual = getByText('this is the slot').style.getPropertyValue('--large-desktop');
+    expected = '50%';
 
     expect(actual).toBe(expected);
   });
@@ -70,7 +106,7 @@ describe('VueGridColumn.vue', () => {
     });
 
     const actual = getByText('this is the slot').style.flex;
-    const expected = '1 1 auto';
+    const expected = '1 1';
 
     expect(actual).toBe(expected);
   });
@@ -85,7 +121,7 @@ describe('VueGridColumn.vue', () => {
     });
 
     const actual = getByText('this is the slot').style.flex;
-    const expected = '0 1 auto';
+    const expected = '0 1';
 
     expect(actual).toBe(expected);
   });
@@ -100,7 +136,7 @@ describe('VueGridColumn.vue', () => {
     });
 
     const actual = getByText('this is the slot').style.flex;
-    const expected = '1 0 auto';
+    const expected = '1 0';
 
     expect(actual).toBe(expected);
   });

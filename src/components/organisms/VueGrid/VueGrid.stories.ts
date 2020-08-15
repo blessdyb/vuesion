@@ -237,3 +237,50 @@ story.add(
     },
   },
 );
+
+story.add(
+  'Responsive Grid',
+  () => ({
+    components: { VueGrid, VueGridRow, VueGridColumn, VueButton },
+    template: `<div>
+    <vue-grid>
+      <vue-grid-row>
+        <vue-grid-column width="100%" tablet-portrait="50%" tablet-landscape="33.3333%" large-desktop="100%">
+          <vue-button block>Item 1</vue-button>
+        </vue-grid-column>
+        <vue-grid-column width="100%" tablet-portrait="50%" tablet-landscape="33.3333%" large-desktop="100%">
+          <vue-button block>Item 2</vue-button>
+        </vue-grid-column>
+        <vue-grid-column width="100%" tablet-portrait="50%" tablet-landscape="33.3333%" large-desktop="100%">
+          <vue-button block>Item 3</vue-button>
+        </vue-grid-column>
+        <vue-grid-column width="100%" tablet-portrait="50%" tablet-landscape="33.3333%" large-desktop="100%">
+          <vue-button block>Item 4</vue-button>
+        </vue-grid-column>
+      </vue-grid-row>
+    </vue-grid>
+
+    <vue-grid>
+      <vue-grid-row>
+        <vue-grid-column tablet-portrait="50%" small-desktop="33.3333%" large-desktop="25%">
+          <vue-button block color="primary">Item 1</vue-button>
+        </vue-grid-column>
+        <vue-grid-column tablet-portrait="50%" small-desktop="33.3333%" large-desktop="25%">
+          <vue-button block color="primary">Item 2</vue-button>
+        </vue-grid-column>
+        <vue-grid-column tablet-portrait="50%" small-desktop="33.3333%" large-desktop="25%">
+          <vue-button block color="primary">Item 3</vue-button>
+        </vue-grid-column>
+        <vue-grid-column tablet-portrait="50%" small-desktop="33.3333%" large-desktop="25%">
+          <vue-button block color="primary">Item 4</vue-button>
+        </vue-grid-column>
+      </vue-grid-row>
+    </vue-grid>
+</div>`,
+  }),
+  {
+    info: {
+      components: { VueGrid, VueGridRow, VueGridColumn },
+    },
+  },
+);

@@ -53,9 +53,38 @@ addParameters({
   options: {
     theme: customTheme,
   },
-});
-
-addParameters({
+  viewport: {
+    viewports: {
+      phone: {
+        name: 'Phone',
+        styles: {
+          width: '320px',
+          height: '568px',
+        },
+      },
+      tablet: {
+        name: 'Tablet',
+        styles: {
+          width: '786px',
+          height: '1024px',
+        },
+      },
+      smallDesktop: {
+        name: 'Small Desktop',
+        styles: {
+          width: '1280px',
+          height: '800px',
+        },
+      },
+      largeDesktop: {
+        name: 'Large Desktop',
+        styles: {
+          width: '1440px',
+          height: '900px',
+        },
+      },
+    },
+  },
   themeSwitcher: {
     themes: [
       { label: 'Light Theme', value: 'light' },

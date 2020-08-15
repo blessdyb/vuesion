@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="[$style.vueGrid, fluid && $style.fluid, $style[`v${verticalSpace}`], $style[`h${horizontalSpace}`]]"
+    :class="[$style.vueGrid, $style[`v${verticalSpace}`], $style[`h${horizontalSpace}`], fluid && $style.fluid]"
     :style="{ textAlign }"
   >
     <slot />
@@ -34,7 +34,6 @@ export default defineComponent({
   max-width: 425px;
   margin: 0 auto;
   position: relative;
-  padding: 0;
 
   @include mediaMin(tabletPortrait) {
     max-width: $screen-tablet-portrait;
@@ -52,22 +51,19 @@ export default defineComponent({
     max-width: $screen-large-desktop;
   }
 
-  &.fluid {
-    width: 100%;
-    max-width: 100%;
-    padding: 0;
-  }
-
   &.hsm {
-    padding: 0 $gutter-sm;
+    padding-left: $gutter-sm;
+    padding-right: $gutter-sm;
   }
 
   &.hmd {
-    padding: 0 $gutter-md;
+    padding-left: $gutter-md;
+    padding-right: $gutter-md;
   }
 
   &.hlg {
-    padding: 0 $gutter-lg;
+    padding-left: $gutter-lg;
+    padding-right: $gutter-lg;
   }
 
   &.vsm {
@@ -80,6 +76,13 @@ export default defineComponent({
 
   &.vlg {
     padding-bottom: $gutter-lg;
+  }
+
+  &.fluid {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 </style>
