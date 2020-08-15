@@ -32,7 +32,7 @@ export default defineComponent({
     initOpen: { type: Boolean, default: false },
   },
   setup(props) {
-    const register = inject<(idx: Ref<number>) => void>('register');
+    const register = inject<(idx: Ref<number>, open: Ref<boolean>, initOpen: boolean) => void>('register');
     const openItem = inject<(idx: Ref<number>) => void>('openItem');
     const idx = ref<number>(null);
     const open = ref(false);

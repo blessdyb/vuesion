@@ -31,6 +31,7 @@ export default defineComponent({
 @import '~@/assets/design-system';
 
 .vueGrid {
+  width: 100%;
   max-width: 425px;
   margin: 0 auto;
   position: relative;

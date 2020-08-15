@@ -1,5 +1,4 @@
 import { spacingValidator, variationValidator } from '@/components/utils';
-import { IItem } from '@/components/IItem';
 import {
   IAnimationProps,
   IAsyncProps,
@@ -41,7 +40,7 @@ export const TextInputControlProps = (): ITextInputControlProps => ({
 });
 
 export const ListControlProps = (): IListControlProps => ({
-  items: { type: Array, default: (): IItem[] => [] },
+  items: { type: Array, required: true },
 });
 
 export const SelectControlProps = (): ISelectControlProps => ({

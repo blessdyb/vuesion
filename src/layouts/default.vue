@@ -19,7 +19,7 @@
     <vue-sidebar>
       <vue-sidebar-group title="Themes">
         <vue-sidebar-group-item>
-          <vue-select id="theme" label="Theme" name="theme" :options="themes" :value="theme" @input="themeSwitch" />
+          <vue-select id="theme" label="Theme" name="theme" :items="themes" :value="theme" @input="themeSwitch" />
         </vue-sidebar-group-item>
       </vue-sidebar-group>
 
@@ -29,7 +29,7 @@
             id="lang"
             label="Languages"
             name="lang"
-            :options="languages"
+            :items="languages"
             :value="$i18n.locale"
             @input="switchLocale"
           />

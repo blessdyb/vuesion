@@ -16,7 +16,7 @@ export interface IInputControlProps extends IFormControlProps {
   name: PropOptions<string>;
   required: PropOptions<boolean>;
   validation: PropOptions;
-  value: PropOptions<string | number | boolean | object>;
+  value: PropOptions;
 }
 
 export interface ITextInputControlProps extends IInputControlProps {
